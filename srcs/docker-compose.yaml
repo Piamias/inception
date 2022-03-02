@@ -1,0 +1,35 @@
+version: '3'
+
+volumes:
+    data: {}
+services:
+    mariadb:
+        container_name: "mariadb"
+        build : ./requirements/mariadb/
+        restart: unless-stopped
+        networks:
+            - inception
+        # tty: true
+    wordpress:
+        container_name: "wordpress"
+        build: ./requirements/wordpress/
+        restart: unless-stopped
+        networks:
+            - inception
+        # tty: true
+        depends_on:
+            - "mariadb"  
+    nginx:
+        container_name: "nginx"
+        build: ./requirements/nginx/
+        restart: unless-stopped
+        ports:
+            - "443:443"
+        # volumes:
+        #     - data:/var/www/html
+        networks:
+            - inception
+        # tty: true
+networks:
+    inception:
+        driver: bridge
