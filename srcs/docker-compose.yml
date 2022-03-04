@@ -13,7 +13,7 @@ services:
       - MYSQL_PASSWORD
       - MYSQL_WP_NAME
     networks:
-      - inception
+      - host
     expose:
       - "3306"
     volumes:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - wordpress
     networks:
-      - inception
+      - host
     ports:
       - "443:443"
     volumes:
@@ -49,7 +49,7 @@ services:
     depends_on:
       - mariadb
     networks:
-      - inception
+      - host
     expose:
       - "9000"
     volumes:
@@ -58,7 +58,7 @@ services:
 
 networks:
 
-  inception:
+  host:
     driver: bridge
 
 volumes:

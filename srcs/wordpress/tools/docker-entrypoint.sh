@@ -9,6 +9,12 @@ then
 	sed -ie s/'$MYSQL_PASSWORD'/$MYSQL_PASSWORD/g var/www/html/wp-config.php
 	chown -R www-data:www-data /var/www/html/*
 	rm /var/www/html/wp-config-sample.php
+	
+	wp-cli core install --allow-root --path="/var/www/html/" --title="Mon super site" --admin_user="inception" --admin_password="inception" --admin_email="inception@inception.fr" --url="https://vpiamias.42.fr" --skip-email
+	
+	wp-cli user create --allow-root --path="/var/www/html/" gigachad giga@chad.com --role=author --user_pass=gigachad
+
+	wp-cli post create --allow-root --path="/var/www/html/" --post_title="Titre : Fuck inception" --post_content="Fuck inception" --post_status=publish --post_author="gigachad"
 fi
 
 sed -ie 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 0.0.0.0:9000/g' \

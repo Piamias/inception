@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+         #
+#    By: vpiamias <vpiamias@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 14:00:47 by dcavalei          #+#    #+#              #
-#    Updated: 2022/01/14 09:44:19 by dcavalei         ###   ########.fr        #
+#    Updated: 2022/03/04 16:23:45 by vpiamias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
 COPY tools/wordpress.conf /etc/nginx/sites-available/
 COPY tools/docker-entrypoint.sh /usr/local/bin/
 
-# make sure that 'docker-entrypoint.sh' is executable aka: chmod +x docker-entrypoint.sh
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 
 CMD [ "nginx", "-g", "daemon off;" ]

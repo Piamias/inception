@@ -7,7 +7,6 @@ if [ ! -d /var/lib/mysql/$MYSQL_WP_NAME ]
 then
 service mysql start
 
-# https://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 mysql --user=root <<EOF
 UPDATE mysql.user SET Password=PASSWORD('$MYSQL_ROOT_PASSWORD') WHERE User='root';
 DELETE FROM mysql.user WHERE User='';
@@ -21,6 +20,7 @@ mysql --user=root --password=$MYSQL_ROOT_PASSWORD <<EOF
 CREATE DATABASE IF NOT EXISTS $MYSQL_WP_NAME;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 GRANT ALL PRIVILEGES ON $MYSQL_WP_NAME.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123';
 FLUSH PRIVILEGES;
 EOF
 

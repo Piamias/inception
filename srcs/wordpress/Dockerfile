@@ -3,16 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dcavalei <dcavalei@student.42.fr>          +#+  +:+       +#+         #
+#    By: vpiamias <vpiamias@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 22:11:50 by kmeeseek          #+#    #+#              #
-#    Updated: 2022/01/14 22:54:07 by dcavalei         ###   ########.fr        #
+#    Updated: 2022/03/04 16:19:39 by vpiamias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-# updating packages
 RUN apt-get update && apt-get install -y \
 	php7.3 \
 	php-fpm \
@@ -33,6 +32,8 @@ RUN wget https://wordpress.org/wordpress-5.8.3.tar.gz \
 
 COPY tools/docker-entrypoint.sh /usr/local/bin/
 COPY tools/wp-config.php /
+COPY tools/wp-cli.phar /usr/local/bin/wp-cli
+RUN chmod 777 /usr/local/bin/wp-cli
 
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 
